@@ -13,12 +13,30 @@ use Exception;
 class DelayCalculator {
 
 	/**
-	 * @param array $rules
+	 * @param string $dateIntervalStr
 	 *
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeDayRuleType(array $rules) : DateTime
+	private function getBaseProcessAt($dateIntervalStr = null): DateTime {
+
+		$processAt = new DateTime();
+
+		if (!is_null($dateIntervalStr)) {
+			$processAt->sub( new DateInterval( $dateIntervalStr ) );
+		}
+
+		return $processAt;
+	}
+
+	/**
+	 * @param array $rules
+	 * @param string $dateIntervalStr
+	 *
+	 * @return DateTime
+	 * @throws Exception
+	 */
+	public function applyDelayWaitTimeDayRuleType(array $rules, $dateIntervalStr = null) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -27,7 +45,7 @@ class DelayCalculator {
 
 		// Create a new queue record with the updated process_at datetime
 		try {
-			$processAt = new DateTime();
+			$processAt = $this->getBaseProcessAt($dateIntervalStr);
 			$processAt->add( new DateInterval( "P{$rules['amount']}D" ) );
 		} catch ( \Exception $e ) {
 			throw new Exception($e->getMessage());
@@ -55,11 +73,12 @@ class DelayCalculator {
 
 	/**
 	 * @param array $rules
+	 * @param string $dateIntervalStr
 	 *
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeMinuteRuleType(array $rules) : DateTime
+	public function applyDelayWaitTimeMinuteRuleType(array $rules, $dateIntervalStr = null) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -68,7 +87,7 @@ class DelayCalculator {
 
 		// Create a new queue record with the updated process_at datetime
 		try {
-			$processAt = new DateTime();
+			$processAt = $this->getBaseProcessAt($dateIntervalStr);
 			$processAt->add( new DateInterval( "PT{$rules['amount']}M" ) );
 		} catch ( \Exception $e ) {
 			throw new Exception($e->getMessage());
@@ -79,11 +98,12 @@ class DelayCalculator {
 
 	/**
 	 * @param array $rules
+	 * @param string $dateIntervalStr
 	 *
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeHourRuleType(array $rules) : DateTime
+	public function applyDelayWaitTimeHourRuleType(array $rules, $dateIntervalStr = null) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -92,7 +112,7 @@ class DelayCalculator {
 
 		// Create a new queue record with the updated process_at datetime
 		try {
-			$processAt = new DateTime();
+			$processAt = $this->getBaseProcessAt($dateIntervalStr);
 			$processAt->add( new DateInterval( "PT{$rules['amount']}H" ) );
 		} catch ( \Exception $e ) {
 			throw new Exception($e->getMessage());
@@ -103,11 +123,12 @@ class DelayCalculator {
 
 	/**
 	 * @param array $rules
+	 * @param string $dateIntervalStr
 	 *
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeWeekRuleType(array $rules) : DateTime
+	public function applyDelayWaitTimeWeekRuleType(array $rules, $dateIntervalStr = null) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -116,7 +137,7 @@ class DelayCalculator {
 
 		// Create a new queue record with the updated process_at datetime
 		try {
-			$processAt = new DateTime();
+			$processAt = $this->getBaseProcessAt($dateIntervalStr);
 			$processAt->add( new DateInterval( "P{$rules['amount']}W" ) );
 		} catch ( \Exception $e ) {
 			throw new Exception($e->getMessage());
@@ -128,11 +149,12 @@ class DelayCalculator {
 
 	/**
 	 * @param array $rules
+	 * @param string $dateIntervalStr
 	 *
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitUntilHourRuleType(array $rules) : DateTime
+	public function applyDelayWaitUntilHourRuleType(array $rules, $dateIntervalStr = null) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['time'])) {
@@ -150,7 +172,7 @@ class DelayCalculator {
 		// Consider offset
 		//$this->considerOffset($rules);
 
-		$processAt = new DateTime();
+		$processAt = $this->getBaseProcessAt($dateIntervalStr);
 		$processAt->setTime($rules['time']['hours'], $rules['time']['minutes'], 0);
 
 		$now = new DateTime();
