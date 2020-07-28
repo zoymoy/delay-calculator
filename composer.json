@@ -1,12 +1,16 @@
 {
   "name": "responder/delay_calculator",
   "description": "A rule-based time calculator",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
+  "type": "library",
   "license": "proprietary",
   "authors": [
     {
       "name": "Yoav",
       "email": "zoymoy@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "php": "^7.1"
+  }
 }
