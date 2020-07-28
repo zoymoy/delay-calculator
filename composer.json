@@ -1,0 +1,12 @@
+{
+  "name": "responder/delay_calculator",
+  "description": "A rule-based time calculator",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Yoav",
+      "email": "zoymoy@gmail.com"
+    }
+  ]
+}
