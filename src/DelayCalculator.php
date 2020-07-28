@@ -18,7 +18,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeDayRuleType(array $rules = []) : DateTime
+	public function applyDelayWaitTimeDayRuleType(array $rules) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -59,7 +59,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeMinuteRuleType(array $rules = []) : DateTime
+	public function applyDelayWaitTimeMinuteRuleType(array $rules) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -83,7 +83,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeHourRuleType(array $rules = []) : DateTime
+	public function applyDelayWaitTimeHourRuleType(array $rules) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -107,7 +107,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitTimeWeekRuleType(array $rules = []) : DateTime
+	public function applyDelayWaitTimeWeekRuleType(array $rules) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['amount'])) {
@@ -132,7 +132,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitUntilHourRuleType(array $rules = []) : DateTime
+	public function applyDelayWaitUntilHourRuleType(array $rules) : DateTime
 	{
 		// Sanity checks
 		if (!isset($rules['time'])) {
@@ -169,7 +169,7 @@ class DelayCalculator {
 	 * @return DateTime
 	 * @throws Exception
 	 */
-	public function applyDelayWaitUntilDateRuleType(array $rules = [], array $dateArray) : DateTime
+	public function applyDelayWaitUntilDateRuleType(array $rules, array $dateArray) : DateTime
 	{
 		if (!isset($dateArray['day']) && !isset($dateArray['month']) && !isset($dateArray['year'])) {
 			// If the personal field value is not set, we can't proceed. Let's keep the row untouched.
