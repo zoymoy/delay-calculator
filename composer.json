@@ -12,7 +12,7 @@
   ],
   "require": {
     "php": "^7.1",
-    "phpunit/phpunit": "8.5.8"
+    "phpunit/phpunit": "7.5.20"
   },
   "autoload": {
     "psr-4": {"DelayCalculator\\": "src/"}
