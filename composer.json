@@ -1,7 +1,7 @@
 {
   "name": "responder/delay_calculator",
   "description": "A rule-based time calculator",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "type": "library",
   "license": "proprietary",
   "authors": [
