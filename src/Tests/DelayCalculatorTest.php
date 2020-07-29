@@ -41,7 +41,8 @@ class DelayCalculatorTest extends TestCase {
 		$rules = [
 			'amount' => 50
 		];
-		$actualRes = $dc->applyDelayWaitTimeDayRuleType($rules, "P30D");
+		$subDateInterval = new \DateInterval("P30D");
+		$actualRes = $dc->applyDelayWaitTimeDayRuleType($rules, $subDateInterval);
 		$expectedRes = new \DateTime();
 		$expectedRes->add(new \DateInterval("P20D"));
 		$expectedRes->setTime(0,1,0);
