@@ -13,6 +13,29 @@ use Exception;
 class DelayCalculator {
 
 	/**
+	 * @var string
+	 */
+	private $referenceDateTime = null;
+
+	/**
+	 * DelayCalculator constructor.\\
+	 *
+	 * @param string $referenceDateTime MySql DateTime format to be used as a reference time.
+	 *
+	 */
+	public function __construct($referenceDateTime = null) {
+		if (!is_null($referenceDateTime)) {
+
+			// Only support MySql datetime format
+			$format = 'Y-m-d H:i:s';
+			$date = DateTime::createFromFormat($format, $referenceDateTime);
+			if ($date instanceof DateTime) {
+				$this->referenceDateTime = $date;
+			}
+		}
+	}
+
+	/**
 	 * @param DateInterval $subDateInterval
 	 *
 	 * @return DateTime
@@ -20,7 +43,13 @@ class DelayCalculator {
 	 */
 	private function getBaseProcessAt(DateInterval $subDateInterval = null): DateTime {
 
-		$processAt = new DateTime();
+		if (!is_null($this->referenceDateTime)) {
+			$processAt = $this->referenceDateTime;
+		}
+		else {
+			// Use now as default
+			$processAt = new DateTime();
+		}
 
 		if (!is_null($subDateInterval)) {
 			$processAt->sub( $subDateInterval );
